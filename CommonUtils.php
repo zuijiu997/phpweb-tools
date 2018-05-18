@@ -63,7 +63,9 @@ class CommonUtils
         return $realip;
     }
 
-
+    /**判断是否是手机客户端
+     * @return bool
+     */
     function isMobile()
     {
         if (isset($_SERVER['HTTP_X_WAP_PROFILE'])) {
@@ -185,45 +187,9 @@ class CommonUtils
 
     }
 
-    /**
-     * 求两个日期之间相差的天数
-     * (针对1970年1月1日之后，求之前可以采用泰勒公式)
-     * @param string $day1
-     * @param string $day2
-     * @return number
-     */
-    function diff_between_twodays($day1, $day2)
-    {
-        $second1 = strtotime($day1);
-        $second2 = strtotime($day2);
-
-        if ($second1 < $second2) {
-            $tmp = $second2;
-            $second2 = $second1;
-            $second1 = $tmp;
-        }
-        return ($second1 - $second2) / 86400;
-    }
-
     function get_day_start_time($t=null){
         $t = $t==null?time():$t;
         return  mktime(0,0,0,date("m",$t),date("d",$t),date("Y",$t));  //当天开始时间
-    }
-
-    /**
-     * 获取2个日期之间的所有日期 Ymd日期以数组形式返回
-     * @param $start  开始时间
-     * @param $end    结束时间
-     */
-    function get_dates($start,$end){
-        $data_arr = array();
-        $dt_start = strtotime($start);
-        $dt_end = strtotime($end);
-        while ($dt_start<=$dt_end){
-            $data_arr[] = date('Y-m-d',$dt_start);
-            $dt_start = strtotime('+1 day',$dt_start);
-        }
-        return $data_arr;
     }
 
     /**
